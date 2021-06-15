@@ -5,7 +5,6 @@ let params = process.argv[4]
 let actionOpen = process.argv[5]
 let newLocation = process.argv[6]
 let jsonFormat = [];
-// let path = '/Users/emilia/Documents/input.txt'
 
 if (name !== '-h') {
     fs.readFile(name, 'utf8', function (err, data) {
@@ -23,8 +22,7 @@ if (name !== '-h') {
             else if (params === 'text') {
                 console.log(`Data is converted into ${params}`)
             }
-        } else {
-            // -o Open
+        } else { //open
             if (params) {
                 createFile(data, params)
             } else {
@@ -33,7 +31,11 @@ if (name !== '-h') {
         }
         if (actionOpen === '-o') {
             if (newLocation) {
-                createFile(JSON.stringify(jsonFormat), newLocation);
+                if (jsonFormat.length === 0) {
+                    createFile(data, newLocation);
+                } else {
+                    createFile(JSON.stringify(jsonFormat), newLocation);
+                }
             } else {
                 console.log("Please enter the new location")
             }
